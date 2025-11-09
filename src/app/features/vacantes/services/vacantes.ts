@@ -8,7 +8,7 @@ import { CrearVacanteRequest, EditarVacanteRequest, Vacante } from '../models/va
   providedIn: 'root',
 })
 export class Vacantes {
-  private base = `${environment.apiUrl}/api/vacantes`;
+  private base = `${environment.apiBase}/vacantes`;
 
   constructor(private http: HttpClient) {}
 

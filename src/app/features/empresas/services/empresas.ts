@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EmpresasService {
-  private base = `${environment.apiUrl}/api/empresas`;
+  private base = `${environment.apiBase}/empresas`;
 
   constructor(private http: HttpClient) {}
 
