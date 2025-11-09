@@ -1,3 +1,7 @@
+:host ::ng-deep .p-dialog-content {
+  padding: 0 !important;
+}
+
 .dialog-form {
   border-radius: 16px;
   overflow: hidden;
@@ -41,6 +45,24 @@
     span {
       font-size: 0.9rem;
       color: var(--p-text-color-secondary);
+    }
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: var(--p-text-color-secondary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    i {
+      vertical-align: middle;
     }
   }
 }
@@ -89,3 +111,4 @@
   border-top: 1px solid var(--p-surface-200);
   background: var(--p-surface-0);
 }
+
