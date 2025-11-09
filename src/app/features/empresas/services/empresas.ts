@@ -11,13 +11,12 @@ export class EmpresasService {
   private base = `${environment.apiUrl}/api/empresas`;
 
   constructor(private http: HttpClient) {}
-  
+
   list(page = 0, size = 20): Observable<Empresa[]> {
     const params = new HttpParams().set('page', page).set('size', size);
     return this.http.get<Empresa[]>(this.base, { params });
   }
 
-  // el path var del backend es Long id (corresponde a idEmpresa)
   get(idEmpresa: number): Observable<Empresa> {
     return this.http.get<Empresa>(`${this.base}/${idEmpresa}`);
   }
@@ -26,8 +25,13 @@ export class EmpresasService {
     return this.http.post<Empresa>(this.base, payload);
   }
 
-  desactivar(idEmpresa: number): Observable<Empresa> {
-    return this.http.patch<Empresa>(`${this.base}/desactivar/${idEmpresa}`, {});
+  // ⬇️ Agregamos update. Ajusta el path si tu back usa otro.
+  update(idEmpresa: number, payload: Partial<Empresa>): Observable<Empresa> {
+    return this.http.put<Empresa>(`${this.base}/${idEmpresa}`, payload);
   }
 
+  // ⬇️ Alineado con lo que te propuse antes (@PutMapping("/{id}/desactivar"))
+  desactivar(idEmpresa: number): Observable<Empresa> {
+    return this.http.put<Empresa>(`${this.base}/${idEmpresa}/desactivar`, {});
+  }
 }
