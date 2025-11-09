@@ -1,9 +1,22 @@
 export interface Vacante {
-  id: string;
+  idVacante: number;
+  idEmpresa: number;           
   titulo: string;
-  descripcion?: string;
-  empresaId: string;          // relación
-  modalidad?: 'PRESENCIAL' | 'REMOTO' | 'HIBRIDO';
-  ciudad?: string;
+  descripcion: string;
   estado: 'ABIERTA' | 'CERRADA';
+  fechaPublicacion: string;   
+  programa?: string;
+  ciudad?: string;
+  modalidad?: 'PRESENCIAL' | 'REMOTO' | 'HIBRIDO';
+}
+
+export interface CrearVacanteRequest {
+  idEmpresa: number;
+  titulo: string;
+  descripcion: string;
+}
+
+export interface EditarVacanteRequest {
+  titulo?: string;
+  descripcion?: string;
 }

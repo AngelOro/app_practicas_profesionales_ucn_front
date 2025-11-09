@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { Estudiante } from '../models/estudiante.model';
+import { CrearEstudianteRequest, Estudiante } from '../models/estudiante.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Estudiantes {
-  private base = `${environment.apiUrl}/estudiantes`;
+  private base = `${environment.apiUrl}/api/estudiantes`;
+
   constructor(private http: HttpClient) {}
-  list() { return this.http.get<Estudiante[]>(this.base); }
-  create(data: Partial<Estudiante>) { return this.http.post<Estudiante>(this.base, data); }
-  update(id: string, data: Partial<Estudiante>) { return this.http.put<Estudiante>(`${this.base}/${id}`, data); }
-  remove(id: string) { return this.http.delete<void>(`${this.base}/${id}`); }
+
+  crear(payload: CrearEstudianteRequest): Observable<Estudiante> {
+    return this.http.post<Estudiante>(this.base, payload);
+  }
+
+  listar(page = 0, size = 20): Observable<Estudiante[]> {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<Estudiante[]>(this.base, { params });
+  }
+
+  obtener(idEstudiante: number): Observable<Estudiante> {
+    return this.http.get<Estudiante>(`${this.base}/${idEstudiante}`);
+  }
 }

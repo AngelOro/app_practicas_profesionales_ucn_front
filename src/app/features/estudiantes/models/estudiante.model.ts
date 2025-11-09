@@ -1,10 +1,15 @@
 export interface Estudiante {
-  id: string;
-  documento: string;
-  nombres: string;
-  apellidos: string;
+  idEstudiante: number;
+  codigo: string;
+  nombre: string;
   correo: string;
-  programa?: string;
-  semestre?: number;
-  activo: boolean;
+  programa: string;
+  activo: boolean | null;
+}
+
+export interface CrearEstudianteRequest {
+  codigo: string;
+  nombre: string;
+  correo: string;
+  programa: string;
 }

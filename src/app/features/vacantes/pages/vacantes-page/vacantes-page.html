@@ -1,1 +1,164 @@
-<p>vacantes-page works!</p>
+<p-toast></p-toast>
+
+<div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+  <h2 class="m-0">Vacantes</h2>
+  <button pButton label="Nueva Vacante" icon="pi pi-plus" (click)="openNew()"></button>
+</div>
+
+<p-table
+  [value]="vacantes"
+  [paginator]="true"
+  [rows]="5"
+  responsiveLayout="scroll"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Título</th>
+      <th>Empresa</th>
+      <th>Estado</th>
+      <th>Fecha Publicación</th>
+      <th style="width: 12rem">Acciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-v>
+    <tr>
+      <td>{{ v.titulo }}</td>
+      <td>{{ getEmpresaNombre(v.idEmpresa) }}</td>
+      <td>
+        <p-tag 
+          [value]="v.estado" 
+          [severity]="v.estado === 'ABIERTA' ? 'success' : 'danger'"
+        ></p-tag>
+      </td>
+      <td>{{ v.fechaPublicacion }}</td>
+      <td>
+        <button 
+          pButton 
+          icon="pi pi-pencil" 
+          rounded 
+          outlined 
+          class="p-mr-2" 
+          (click)="openEdit(v)"
+        ></button>
+        <button 
+          pButton 
+          icon="pi pi-lock" 
+          rounded 
+          outlined 
+          severity="danger" 
+          (click)="cerrar(v)"
+          [disabled]="v.estado === 'CERRADA'"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="dialog"
+  [modal]="true"
+  [style]="{ width: '640px', maxWidth: '94vw' }"
+  [contentStyle]="{ padding: '0' }"
+  [showHeader]="false"     
+  [closable]="!saving"
+  [draggable]="false"
+  (onHide)="dialog=false"
+>
+  <form class="dialog-form" (ngSubmit)="save()" novalidate>
+    <!-- Banner degradado con título -->
+    <div class="dialog-banner">
+      <div class="banner-icon">
+        <i class="pi pi-briefcase"></i>
+      </div>
+      <div class="banner-text">
+        <h3>{{ editing ? 'Editar vacante' : 'Nueva vacante' }}</h3>
+        <span>Completa los campos obligatorios marcados con <b>*</b></span>
+      </div>
+    </div>
+
+    <!-- Cuerpo del formulario -->
+    <div class="dialog-body grid">
+      <!-- Empresa -->
+      <div class="field col-12 md:col-6">
+        <label for="empresa">Empresa <span class="req">*</span></label>
+        <p-select
+          id="empresa"
+          [options]="empresas"
+          optionLabel="nombre"
+          optionValue="idEmpresa"
+          [filter]="true"
+          placeholder="Selecciona la empresa"
+          [(ngModel)]="form.idEmpresa"
+          name="idEmpresa"
+          [ngClass]="{ 'invalid': isInvalid('idEmpresa') }"
+          [disabled]="editing !== null"
+          styleClass="w-full"
+        ></p-select>
+        <small class="err" *ngIf="isInvalid('idEmpresa')">La empresa es obligatoria.</small>
+      </div>
+
+      <!-- Título -->
+      <div class="field col-12 md:col-6">
+        <label for="titulo">Título <span class="req">*</span></label>
+        <input
+          id="titulo"
+          pInputText
+          maxlength="120"
+          [(ngModel)]="form.titulo"
+          name="titulo"
+          placeholder="Ej: Desarrollador Frontend"
+          [ngClass]="{ 'invalid': isInvalid('titulo') }"
+          class="w-full"
+        />
+        <div class="hint-row">
+          <small class="muted">{{ (form.titulo?.length || 0) }}/120</small>
+        </div>
+        <small class="err" *ngIf="isInvalid('titulo')">El título es obligatorio.</small>
+      </div>
+
+      <!-- Descripción -->
+      <div class="field col-12">
+        <label for="descripcion">Descripción <span class="req">*</span></label>
+        <textarea
+          id="descripcion"
+          pInputTextarea
+          rows="5"
+          maxlength="1000"
+          [autoResize]="true"
+          [(ngModel)]="form.descripcion"
+          name="descripcion"
+          placeholder="Describe el rol, responsabilidades y requisitos…"
+          [ngClass]="{ 'invalid': isInvalid('descripcion') }"
+          class="w-full"
+        ></textarea>
+        <div class="hint-row">
+          <small class="muted">{{ (form.descripcion?.length || 0) }}/1000</small>
+        </div>
+        <small class="err" *ngIf="isInvalid('descripcion')">La descripción es obligatoria.</small>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="dialog-foot">
+      <button
+        type="button"
+        pButton
+        label="Cancelar"
+        icon="pi pi-times"
+        class="p-button-text"
+        (click)="dialog=false"
+        [disabled]="saving"
+      ></button>
+
+      <button
+        type="submit"
+        pButton
+        label="Guardar"
+        icon="pi pi-check"
+        [loading]="saving"
+        [disabled]="saving || !isFormValid()"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

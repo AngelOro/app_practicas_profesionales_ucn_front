@@ -1,7 +1,15 @@
 export interface Empresa {
-  id: string;       
-  nit: string;
+  idEmpresa: number; 
   nombre: string;
-  ciudad?: string;
-  activa: boolean;
+  nit: string;
+  correo: string;
+  telefono: string;
+  activo: boolean | null;
+}
+
+export interface CrearEmpresaRequest {
+  nombre: string;
+  nit: string;
+  correo: string;
+  telefono: string;
 }

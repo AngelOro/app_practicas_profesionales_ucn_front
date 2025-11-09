@@ -1,1 +1,44 @@
-/* PrimeNG y estilos base */
+@import "primeicons/primeicons.css";     
+@import "primeflex/primeflex.css";        
+
+
+*,
+*::before,
+*::after {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.pi,
+.pi::before,
+.pi::after,
+.material-icons,
+.material-icons-outlined,
+.material-icons-round,
+.material-icons-sharp,
+.material-icons-two-tone {
+  font-family: 'PrimeIcons' !important;
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
+  display: inline-block;
+  text-decoration: inherit;
+  text-align: center;
+}
+
+
+.material-icons,
+.material-icons-outlined,
+.material-icons-round,
+.material-icons-sharp,
+.material-icons-two-tone {
+  font-family: 'Material Icons' !important;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

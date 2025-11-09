@@ -1,1 +1,74 @@
-<p>empresas-page works!</p>
+<p-toast></p-toast>
+
+<div class="p-d-flex p-jc-between p-ai-center p-mb-3">
+  <h2 class="m-0">Empresas</h2>
+  <button pButton label="Nueva Empresa" icon="pi pi-plus" (click)="openNew()"></button>
+</div>
+
+<p-table
+  [value]="empresas"
+  [paginator]="true"
+  [rows]="5"
+  responsiveLayout="scroll"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nombre</th>
+      <th>NIT</th>
+      <th>Telefono</th>
+      <th>Activa</th>
+      <th style="width: 10rem">Acciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-emp>
+    <tr>
+      <td>{{ emp.nombre }}</td>
+      <td>{{ emp.nit }}</td>
+      <td>{{ emp.telefono }}</td>
+      <td>
+        <p-tag [value]="emp.activo ? 'Sí' : 'No'" [severity]="emp.activo ? 'success' : 'danger'"></p-tag>
+      </td>
+      <td>
+        <button pButton icon="pi pi-pencil" rounded outlined class="p-mr-2" (click)="editEmpresa(emp)"></button>
+        <button pButton icon="pi pi-trash" rounded outlined severity="danger" (click)="deleteEmpresa(emp)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  header="{{ empresa.idEmpresa ? 'Editar Empresa' : 'Nueva Empresa' }}"
+  [(visible)]="empresaDialog"
+  [modal]="true"
+  [style]="{ width: '400px' }"
+  (onHide)="hideDialog()"
+>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" pInputText [(ngModel)]="empresa.nombre" required />
+    </div>
+
+    <div class="p-field">
+      <label for="nit">NIT</label>
+      <input id="nit" pInputText [(ngModel)]="empresa.nit" />
+    </div>
+
+    <div class="p-field">
+      <label for="telefono">Telefono</label>
+      <input id="telefono" pInputText [(ngModel)]="empresa.telefono" />
+    </div>
+
+    <div class="p-field-checkbox">
+        <p-checkbox [(ngModel)]="empresa.activo" binary="true" inputId="activa"></p-checkbox>
+        <label for="activa">Activa</label>
+    </div>
+
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton label="Guardar" icon="pi pi-check" (click)="saveEmpresa()"></button>
+  </ng-template>
+</p-dialog>
