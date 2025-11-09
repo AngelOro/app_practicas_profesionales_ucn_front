@@ -26,15 +26,67 @@
   </ng-template>
 </p-table>
 
-<p-dialog header="Nuevo estudiante" [(visible)]="dialog" [modal]="true" [style]="{width:'480px'}">
-  <div class="p-fluid">
-    <div class="p-field"><label for="codigo">Código</label><input id="codigo" pInputText [(ngModel)]="form.codigo"></div>
-    <div class="p-field"><label for="nombre">Nombre</label><input id="nombre" pInputText [(ngModel)]="form.nombre"></div>
-    <div class="p-field"><label for="correo">Correo</label><input id="correo" pInputText [(ngModel)]="form.correo"></div>
-    <div class="p-field"><label for="programa">Programa</label><input id="programa" pInputText [(ngModel)]="form.programa"></div>
-  </div>
-  <ng-template pTemplate="footer">
-    <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="dialog=false"></button>
-    <button pButton label="Guardar" icon="pi pi-check" (click)="save()"></button>
-  </ng-template>
+<p-dialog
+  [(visible)]="dialog"
+  [modal]="true"
+  [style]="{ width: '640px', maxWidth: '94vw' }"
+  [contentStyle]="{ padding: '0' }"
+  [showHeader]="false"     
+  [closable]="false"
+  [draggable]="false"
+  (onHide)="dialog=false"
+>
+  <form class="dialog-form" (ngSubmit)="save()" novalidate>
+    <!-- Banner -->
+    <div class="dialog-banner">
+      <div class="banner-icon">
+        <i class="pi pi-user"></i>
+      </div>
+      <div class="banner-text">
+        <h3>Nuevo estudiante</h3>
+        <span>Completa los campos obligatorios marcados con <b>*</b></span>
+      </div>
+    </div>
+
+    <!-- Cuerpo -->
+    <div class="dialog-body grid">
+      <div class="field col-12 md:col-6">
+        <label for="codigo">Código <span class="req">*</span></label>
+        <input id="codigo" pInputText [(ngModel)]="form.codigo" name="codigo" placeholder="Ej: 202512345" 
+               [ngClass]="{ 'invalid': isInvalid('codigo') }" class="w-full" />
+        <small class="err" *ngIf="isInvalid('codigo')">El código es obligatorio.</small>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="programa">Programa <span class="req">*</span></label>
+        <input id="programa" pInputText [(ngModel)]="form.programa" name="programa" placeholder="Ingeniería de Software"
+               [ngClass]="{ 'invalid': isInvalid('programa') }" class="w-full" />
+        <small class="err" *ngIf="isInvalid('programa')">El programa es obligatorio.</small>
+      </div>
+
+      <div class="field col-12">
+        <label for="nombre">Nombre <span class="req">*</span></label>
+        <input id="nombre" pInputText [(ngModel)]="form.nombre" name="nombre" placeholder="Nombre completo"
+               [ngClass]="{ 'invalid': isInvalid('nombre') }" class="w-full" />
+        <small class="err" *ngIf="isInvalid('nombre')">El nombre es obligatorio.</small>
+      </div>
+
+      <div class="field col-12">
+        <label for="correo">Correo <span class="req">*</span></label>
+        <input id="correo" pInputText [(ngModel)]="form.correo" name="correo" placeholder="correo@ucn.edu.co"
+               [ngClass]="{ 'invalid': isInvalid('correo') || (submitted && !isEmail(form.correo)) }" class="w-full" />
+        <small class="err" *ngIf="isInvalid('correo')">El correo es obligatorio.</small>
+        <small class="err" *ngIf="submitted && form.correo && !isEmail(form.correo)">Correo inválido.</small>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="dialog-foot">
+      <button type="button" pButton label="Cancelar" icon="pi pi-times" class="p-button-text"
+              (click)="dialog=false" [disabled]="saving"></button>
+      <button type="submit" pButton label="Guardar" icon="pi pi-check"
+              [loading]="saving" [disabled]="saving || !isFormValid()"></button>
+    </div>
+  </form>
 </p-dialog>
+
