@@ -5,10 +5,11 @@ import { PrimengModule } from '../../../../primeng/primeng.module';
 import { CrearEstudianteRequest, Estudiante } from '../../models/estudiante.model';
 import { Estudiantes } from '../../services/estudiantes';
 import { CommonModule } from '@angular/common';
+import { Header } from '../../../../shared/layout/header/header';
 
 @Component({
   selector: 'app-estudiantes-page',
-  imports: [PrimengModule, FormsModule, CommonModule],
+  imports: [PrimengModule, FormsModule, CommonModule, Header],
   templateUrl: './estudiantes-page.html',
   styleUrl: './estudiantes-page.scss',
   providers: [MessageService],

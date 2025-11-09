@@ -6,13 +6,11 @@ import { Button } from 'primeng/button';
 import { Menubar } from 'primeng/menubar';
 import { PanelMenu } from 'primeng/panelmenu';
 
-import { Shell } from './layout/shell/shell';
-import { Header } from './layout/header/header';
-import { Sidebar } from './layout/sidebar/sidebar';
 import { RouterModule } from '@angular/router';
+import { PrimengModule } from '../primeng/primeng.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, Button, Menubar, PanelMenu, Shell, Header, Sidebar],
-  exports: [Shell, Header, Sidebar]
+  imports: [CommonModule, RouterModule, Button, Menubar, PanelMenu, PrimengModule],
+  exports: [Button, Menubar, PanelMenu, PrimengModule]
 })
 export class SharedModule {}

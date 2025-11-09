@@ -1,1 +1,16 @@
-<p>header works!</p>
+<div class="page-header">
+  <div class="left">
+    <span class="icon">
+      <i [class]="icon"></i>
+    </span>
+    <div class="titles">
+      <h2 class="title">{{ title }}</h2>
+      <p class="subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+    </div>
+  </div>
+
+  <!-- Acciones: lo que pongas adentro del componente -->
+  <div class="right">
+    <ng-content></ng-content>
+  </div>
+</div>

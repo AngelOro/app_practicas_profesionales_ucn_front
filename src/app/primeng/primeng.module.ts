@@ -39,6 +39,10 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { SkeletonModule } from 'primeng/skeleton';
 import { StepperModule } from 'primeng/stepper';
 import { FileUploadModule } from 'primeng/fileupload';
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+import { BadgeModule } from 'primeng/badge';
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 @NgModule({
   imports: [FileUploadModule,ChipModule,SkeletonModule,BreadcrumbModule,InputNumber,SelectButton,Dialog,ListboxModule,ButtonModule,ConfirmDialog,InputMask,Fluid,Tooltip,MultiSelectModule,SplitterModule,InputGroup,InputGroupAddonModule,AutoCompleteModule],
@@ -85,6 +89,12 @@ import { FileUploadModule } from 'primeng/fileupload';
     SplitButtonModule,
     StepperModule,
     FileUploadModule,
+    MenuModule,
+    MenubarModule,
+    AvatarModule,
+    BadgeModule,
+    PanelMenuModule,
+    BreadcrumbModule
   ]
 })
 export class PrimengModule {

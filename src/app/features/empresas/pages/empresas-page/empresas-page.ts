@@ -5,11 +5,12 @@ import { Empresa } from '../../models/empresa.model';
 import { PrimengModule } from '../../../../primeng/primeng.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Header } from '../../../../shared/layout/header/header';
 
 @Component({
   selector: 'app-empresas-page',
   templateUrl: './empresas-page.html',
-  imports: [PrimengModule, FormsModule, CommonModule],
+  imports: [PrimengModule, FormsModule, CommonModule, Header],
   styleUrl: './empresas-page.scss',
   providers: [MessageService]
 })

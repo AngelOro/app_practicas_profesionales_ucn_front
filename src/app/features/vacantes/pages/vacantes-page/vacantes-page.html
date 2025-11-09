@@ -1,9 +1,12 @@
 <p-toast></p-toast>
 
-<div class="p-d-flex p-jc-between p-ai-center p-mb-3">
-  <h2 class="m-0">Vacantes</h2>
+<app-header
+  icon="pi pi-briefcase"
+  title="Vacantes"
+  subtitle="Gestiona las posiciones publicadas"
+>
   <button pButton label="Nueva Vacante" icon="pi pi-plus" (click)="openNew()"></button>
-</div>
+</app-header>
 
 <p-table
   [value]="vacantes"

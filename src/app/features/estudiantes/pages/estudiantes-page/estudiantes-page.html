@@ -1,9 +1,12 @@
 <p-toast></p-toast>
 
-<div class="p-d-flex p-jc-between p-ai-center p-mb-3">
-  <h2 class="m-0">Estudiantes</h2>
+<app-header
+  icon="pi pi-user"
+  title="Estudiantes"
+  subtitle="Gestiona los estudiantes"
+>
   <button pButton label="Nuevo" icon="pi pi-plus" (click)="openNew()"></button>
-</div>
+</app-header>
 
 <p-table [value]="estudiantes" [paginator]="true" [rows]="5" responsiveLayout="scroll">
   <ng-template pTemplate="header">

@@ -7,10 +7,11 @@ import { MessageService } from 'primeng/api';
 import { PrimengModule } from '../../../../primeng/primeng.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Header } from '../../../../shared/layout/header/header';
 
 @Component({
   selector: 'app-vacantes-page',
-  imports: [PrimengModule, FormsModule, CommonModule],
+  imports: [PrimengModule, FormsModule, CommonModule, Header ],
   templateUrl: './vacantes-page.html',
   styleUrl: './vacantes-page.scss',
   providers: [MessageService],

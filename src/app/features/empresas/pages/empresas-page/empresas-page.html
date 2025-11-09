@@ -1,9 +1,12 @@
 <p-toast></p-toast>
 
-<div class="p-d-flex p-jc-between p-ai-center p-mb-3">
-  <h2 class="m-0">Empresas</h2>
-  <button pButton label="Nueva Empresa" icon="pi pi-plus" (click)="openNew()"></button>
-</div>
+<app-header
+  icon="pi pi-building"
+  title="Empresas"
+  subtitle="Gestiona las empresas"
+>
+  <button pButton label="Nuevo" icon="pi pi-plus" (click)="openNew()"></button>
+</app-header>
 
 <p-table
   [value]="empresas"

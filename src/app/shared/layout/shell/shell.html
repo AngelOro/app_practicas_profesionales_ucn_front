@@ -1,0 +1,50 @@
+<!-- TOP BAR -->
+<p-toolbar class="topbar">
+  <div class="p-toolbar-group-start gap">
+    <button pButton icon="pi pi-bars" class="p-button-text" (click)="drawerOpen = !drawerOpen"></button>
+    <img src="assets/logo.svg" alt="logo" class="logo" />
+    <h1 class="title">Prácticas UCN</h1>
+  </div>
+
+  <div class="p-toolbar-group-end gap">
+    <span class="search">
+      <i class="pi pi-search"></i>
+      <input pInputText placeholder="Buscar..." />
+    </span>
+
+    <button pButton icon="pi pi-bell" class="p-button-text" pBadge value="3"></button>
+
+    <p-menu #popupMenu [model]="appMenu" [popup]="true"></p-menu>
+    <button pButton icon="pi pi-ellipsis-v" class="p-button-text" (click)="popupMenu.toggle($event)"></button>
+
+    <p-avatar label="A" shape="circle"></p-avatar>
+  </div>
+</p-toolbar>
+
+<!-- ✅ SIDEBAR DESKTOP (fija) -->
+<nav class="sidenav">
+  <p-panelMenu [model]="appMenu"></p-panelMenu>
+</nav>
+
+<!-- ✅ DRAWER MÓVIL (off-canvas) -->
+<aside class="drawer" [class.open]="drawerOpen" (click)="drawerOpen=false">
+  <div class="drawer-panel" (click)="$event.stopPropagation()">
+    <div class="drawer-head">
+      <img src="assets/logo.svg" alt="logo" />
+      <div>
+        <div class="brand">Prácticas UCN</div>
+        <small class="muted">Panel</small>
+      </div>
+      <button pButton icon="pi pi-times" class="p-button-text ml-auto" (click)="drawerOpen=false"></button>
+    </div>
+    <p-panelMenu [model]="appMenu"></p-panelMenu>
+  </div>
+</aside>
+
+<!-- CONTENIDO -->
+<div class="content">
+  <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+  <div class="page">
+    <ng-content></ng-content>
+  </div>
+</div>

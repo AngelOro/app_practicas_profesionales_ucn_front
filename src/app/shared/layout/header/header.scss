@@ -1,0 +1,53 @@
+:host {
+  display: block;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  background: #fff;
+  border: 1px solid var(--p-surface-200);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e7f0ff, #f1fbff);
+  color: #2563eb;
+  font-size: 1.1rem;
+}
+.titles .title {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.titles .subtitle {
+  margin: 0.125rem 0 0;
+  color: var(--p-text-color-secondary);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* versión compacta si lo quieres más pequeño */
+:host(.dense) .page-header {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+}
